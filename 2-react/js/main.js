@@ -13,12 +13,18 @@ class App extends React.component {
 		// this.state.searchKeyword = event.target.value;
 		// this.forceUpdate();
 
+		const searchKeyword = event.target.value;
+
 		// 컴포넌트 상태 변화 약속
-		this.setState({
-			searchKeyword: event.target.value,
-		});
+		this.setState({ searchKeyword });
 	}
 	render() {
+		// let resetButton = null;
+
+		// if (this.state.searchKeyword.length > 0) {
+		// 	resetButton = <button type="reset" className="btn-reset"></button>;
+		// }
+
 		return (
 			<>
 				<header>
@@ -34,7 +40,9 @@ class App extends React.component {
 							// TODO
 							onChange={(event) => this.handleChangeInput(event)}
 						/>
-						<button type="reset" className="btn-reset"></button>
+						{this.state.searchKeyword.length > 0 && (
+							<button type="reset" className="btn-reset"></button>
+						)}
 					</form>
 				</div>
 			</>
