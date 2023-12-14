@@ -5,21 +5,36 @@ class App extends React.component {
 
 		this.state = {
 			searchKeyword: "",
+			searchResult: [],
 		};
 	}
 
 	handleSubmit(event) {
 		// TODO
 		event.preventDefault();
-		console.log(event, this.state.searchKeywrod);
+		console.log(event, this.state.searchKeyword);
+	}
+
+	handleReset() {
+		this.setState({ searchKeyword: "" });
+
+		this.setState(
+			() => {
+				return { searchKeyword: "" };
+			},
+			() => {
+				console.log("TODO: handleReset", this.state.searchKeyword);
+			}
+		);
 	}
 
 	handleChangeInput(event) {
 		// TODO
-		// this.state.searchKeyword = event.target.value;
-		// this.forceUpdate();
-
 		const searchKeyword = event.target.value;
+
+		if (searchKeyword.length <= 0) {
+			this.handleReset();
+		}
 
 		// 컴포넌트 상태 변화 약속
 		this.setState({ searchKeyword });
@@ -41,6 +56,7 @@ class App extends React.component {
 					<form
 						id="search-form-view"
 						onSubmit={(event) => this.handleSubmit(event)}
+						onChange={() => this.handleReset()}
 					>
 						<input
 							type="text"
@@ -54,6 +70,16 @@ class App extends React.component {
 							<button type="reset" className="btn-reset"></button>
 						)}
 					</form>
+					<div className="content">
+						{
+							/* TODO */
+							this.state.searchResult.length > 0 ? (
+								<div>TODO: 검색 결과 목록 표시하기</div>
+							) : (
+								<div className="empty-box">검색 결과가 없습니다</div>
+							)
+						}
+					</div>
 				</div>
 			</>
 		);
