@@ -8,6 +8,12 @@ class App extends React.component {
 		};
 	}
 
+	handleSubmit(event) {
+		// TODO
+		event.preventDefault();
+		console.log(event, this.state.searchKeywrod);
+	}
+
 	handleChangeInput(event) {
 		// TODO
 		// this.state.searchKeyword = event.target.value;
@@ -31,7 +37,11 @@ class App extends React.component {
 					<h2 className="container">검색</h2>
 				</header>
 				<div className="container">
-					<form id="search-form-view">
+					{/* TODO */}
+					<form
+						id="search-form-view"
+						onSubmit={(event) => this.handleSubmit(event)}
+					>
 						<input
 							type="text"
 							placeholder="검색어를 입력하세요"
