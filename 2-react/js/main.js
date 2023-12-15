@@ -74,7 +74,16 @@ class App extends React.component {
 						{
 							/* TODO */
 							this.state.searchResult.length > 0 ? (
-								<div>TODO: 검색 결과 목록 표시하기</div>
+								<ul>
+									{this.state.searchResult.map((item) => {
+										return (
+											<li>
+												<img src={item.imageUrl} alt={item.name} />
+												<p>{item.name}</p>
+											</li>
+										);
+									})}
+								</ul>
 							) : (
 								<div className="empty-box">검색 결과가 없습니다</div>
 							)
