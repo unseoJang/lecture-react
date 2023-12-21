@@ -13,6 +13,11 @@ class App extends React.component {
 		// TODO
 		event.preventDefault();
 		console.log(event, this.state.searchKeyword);
+		this.search();
+	}
+
+	search(searchKeyword) {
+		// TODO
 	}
 
 	handleReset() {
@@ -46,48 +51,54 @@ class App extends React.component {
 		// 	resetButton = <button type="reset" className="btn-reset"></button>;
 		// }
 
+		const searchResult =
+			this.state.searchResult.length > 0 ? (
+				<ul>
+					{this.state.searchResult.map((item) => {
+						return (
+							<li key={item.id}>
+								<img src={item.imageUrl} alt={item.name} />
+								<p>{item.name}</p>
+							</li>
+						);
+					})}
+				</ul>
+			) : (
+				<div className="empty-box">검색 결과가 없습니다</div>
+			);
+
+		const searchForm = (
+			<form
+				id="search-form-view"
+				onSubmit={(event) => this.handleSubmit(event)}
+				onChange={() => this.handleReset()}
+			>
+				<input
+					type="text"
+					placeholder="검색어를 입력하세요"
+					autoFocus
+					value={this.state.searchKeyword}
+					// TODO
+					onChange={(event) => this.handleChangeInput(event)}
+				/>
+				{this.state.searchKeyword.length > 0 && (
+					<button type="reset" className="btn-reset"></button>
+				)}
+			</form>
+		);
+
 		return (
 			<>
 				<header>
 					<h2 className="container">검색</h2>
 				</header>
 				<div className="container">
-					{/* TODO */}
-					<form
-						id="search-form-view"
-						onSubmit={(event) => this.handleSubmit(event)}
-						onChange={() => this.handleReset()}
-					>
-						<input
-							type="text"
-							placeholder="검색어를 입력하세요"
-							autoFocus
-							value={this.state.searchKeyword}
-							// TODO
-							onChange={(event) => this.handleChangeInput(event)}
-						/>
-						{this.state.searchKeyword.length > 0 && (
-							<button type="reset" className="btn-reset"></button>
-						)}
-					</form>
+					{/* TODO */ searchForm}
+
 					<div className="content">
-						{
+						{this.state.submitted &&
 							/* TODO */
-							this.state.searchResult.length > 0 ? (
-								<ul>
-									{this.state.searchResult.map((item) => {
-										return (
-											<li>
-												<img src={item.imageUrl} alt={item.name} />
-												<p>{item.name}</p>
-											</li>
-										);
-									})}
-								</ul>
-							) : (
-								<div className="empty-box">검색 결과가 없습니다</div>
-							)
-						}
+							searchResult}
 					</div>
 				</div>
 			</>
